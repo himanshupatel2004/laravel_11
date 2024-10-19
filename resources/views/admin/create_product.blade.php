@@ -1,0 +1,36 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>Add Product</h1>
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control">{{ old('description') }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price" class="form-control" value="{{ old('price') }}">
+        </div>
+        <div class="form-group">
+            <label for="image">Product Image</label>
+            <input type="file" id="image" name="image" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-success">Add Product</button>
+    </form>
+</div>
+@endsection
